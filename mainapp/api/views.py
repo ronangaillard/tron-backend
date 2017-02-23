@@ -98,7 +98,8 @@ def route_logout():
 @app.route("/api/user/id", methods=['GET'])
 def route_user_id():
     if 'user_id' in session:
-        return buildSuccessResponse({'id': session['user_id']})
+        current_player = Player.query.filter_by(id=session['user_id']).first()
+        return buildSuccessResponse({'id': session['user_id'], 'name': current_player.name})
     else:
         return buildErrorResponse('Not signed in')
 
