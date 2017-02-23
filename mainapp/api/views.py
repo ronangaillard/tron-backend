@@ -10,7 +10,10 @@ import simulate_fight
 # Routes
 @app.route("/")
 def hello():
-    return "Welcome to our serious game server"
+    if app.debug:
+        return "<h1>Warning : DEBUG mode</h1>Welcome to our serious game server"
+    else:
+        return "Welcome to our serious game server<br/><i>Runnig as production server</i>"
 
 @app.route("/api/signup", methods=['POST'])
 def route_signup():
