@@ -1,3 +1,4 @@
 SECRET_KEY
 mainapp/gamedatabase.db
 *.pyc
+DEVELOPMENT
