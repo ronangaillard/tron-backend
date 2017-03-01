@@ -6,3 +6,4 @@ class BaseConfig(object):
 class ProdConfig(BaseConfig):
        'Production config class'
        DEBUG = False
+#       SERVER_NAME = 'ronangaillard.fr:80'
