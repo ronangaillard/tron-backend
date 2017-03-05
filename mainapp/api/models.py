@@ -20,6 +20,7 @@ class Player(db.Model):
         m = hashlib.md5()
         m.update(password)
         password_hashed = m.hexdigest()
+        iaCode = 'return direction'
 
         self.name = name
         self.password = password_hashed
