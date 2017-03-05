@@ -57,6 +57,8 @@ def emulate(player1_code, player2_code):
         players[i]['initial_x'] = PLAYERS_INIT_POS[i][0]
         players[i]['initial_y'] = PLAYERS_INIT_POS[i][1]
 
+        players[i]['initialPosition'] = [ PLAYERS_INIT_POS[i][0], PLAYERS_INIT_POS[i][1] ]
+
         players[i]['color'] = [0, 0, 0]
 
         players[i]['moves'] = []
