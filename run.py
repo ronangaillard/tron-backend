@@ -9,7 +9,7 @@ if __name__ == '__main__':
         print "WARNING RUNNING AS DEVELOPMENT SERVER"
         app.config.from_object('configuration.BaseConfig')
         CORS(app, supports_credentials = True)
-        app.run(host='0.0.0.0')
+        app.run(host='127.0.0.1')
 
     except:
         # Production server

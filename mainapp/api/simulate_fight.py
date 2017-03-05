@@ -1,6 +1,7 @@
 import lupa
 from lupa import LuaRuntime
 import json
+import sys
 
 GAME_SIZE = 20
 
@@ -15,14 +16,31 @@ PLAYERS_INIT_DIR = ['E', 'W', 'N', 'S']
 PLAYERS_INIT_POS = [    [0, 10],
                         [GAME_SIZE, 10]]
 
+class InterpretationError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 
 
 def emulate(player1_code, player2_code):
     print 'running'
-    lua = LuaRuntime(unpack_returned_tuples=True)
+    lua = LuaRuntime(unpack_returned_tuples=True) 
     print "Getting player 1 code"
-    lua_func_player_1 = lua.eval(player1_code)
-    #lua_func_player_2 = lua.eval(player2_code)
+    try:
+        print 'code 1 : ', 'function (walls, pos_x, pos_y, direction)\n' + player1_code + '\nend'
+        lua_func_player_1 = lua.eval('function (walls, pos_x, pos_y, direction)\n' + player1_code + '\nend')
+    except Exception as ex:
+        print 'error'
+        raise InterpretationError('Syntax error in your code. '+ ex.message)
+
+    try:
+        print 'code 2 : ', 'function (walls, pos_x, pos_y, direction)\n' + player2_code + '\nend'
+        lua_func_player_2 = lua.eval('function (walls, pos_x, pos_y, direction)\n' + player2_code + '\nend')
+    except:
+        print 'error'
+        raise InterpretationError('Syntax error in enemy\'s code. Fight someone else :/')
 
     players = []
 

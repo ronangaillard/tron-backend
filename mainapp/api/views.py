@@ -5,6 +5,8 @@ from copy import deepcopy
 import json
 import hashlib
 import simulate_fight
+from simulate_fight import InterpretationError
+import sys
 
 
 # Routes
@@ -115,9 +117,14 @@ def route_gifht_launch():
     askingFightPlayer = Player.query.filter_by(id=session['user_id']).first()
     fightedPlayer = Player.query.filter_by(id=request.form['enemyId']).first()
     print askingFightPlayer, 'fighting against ', fightedPlayer
-    fight_result = simulate_fight.emulate(askingFightPlayer.iaCode, fightedPlayer.iaCode)
-    
-    return buildSuccessResponse({'fightResult': fight_result})
+    try:
+        fight_result = simulate_fight.emulate(askingFightPlayer.iaCode, fightedPlayer.iaCode)
+        return buildSuccessResponse({'fightResult': fight_result})
+    except InterpretationError as ie:
+        return buildErrorResponse('Error while interpreting Lua code', {'errorText': ie.value})
+    except:
+        return buildErrorResponse('Error while interpreting Lua code', {'errorText': 'Syntax error ?'})
+  
 
 
 def buildErrorResponse(info = 'Unknown issue', responseDict= None):
