@@ -91,7 +91,7 @@ def emulate(player1_code, player2_code):
             if player['dir'] == 'W':
                 player['x'] -= 1
 
-        
+            walls[player['x']][player['y']] = 1
 
 
         if  player['x'] < 0 or player['x'] > GAME_SIZE or \
