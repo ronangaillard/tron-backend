@@ -104,7 +104,7 @@ def emulate(player1_code, player2_code):
                 winner = -1
 
         
-        #player['dir'] = lua_func_player_1(walls, player['x'], player['y'], player['dir'])
+        player['dir'] = lua_func_player_1(walls, player['x'], player['y'], player['dir'])
         print "Player ", index, " direction : ", player['dir']
 
             
