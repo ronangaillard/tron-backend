@@ -122,8 +122,8 @@ def route_gifht_launch():
         return buildSuccessResponse({'fightResult': fight_result})
     except InterpretationError as ie:
         return buildErrorResponse('Error while interpreting Lua code', {'errorText': ie.value})
-    except:
-        return buildErrorResponse('Error while interpreting Lua code', {'errorText': 'Syntax error ?'})
+    except Exception as e:
+        return buildErrorResponse('Error while interpreting Lua code', {'errorText': 'Error in code : ' + str(e)})
   
 
 
