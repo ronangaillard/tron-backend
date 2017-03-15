@@ -91,17 +91,18 @@ def emulate(player1_code, player2_code):
             if player['dir'] == 'W':
                 player['x'] -= 1
 
-            walls[player['x']][player['y']] = 1
+          
 
 
-        if  player['x'] < 0 or player['x'] > GAME_SIZE or \
-            player['y'] < 0 or player['y'] > GAME_SIZE or\
+        if  player['x'] < 0 or player['x'] >= GAME_SIZE or \
+            player['y'] < 0 or player['y'] >= GAME_SIZE or\
             walls[player['x']][player['y']] == 1 :
 
             if winner == -2:
                 winner = 0 if index == 1 else 1
             else:
                 winner = -1
+                
 
         
         player['dir'] = lua_func_player_1(walls, player['x'], player['y'], player['dir'])
